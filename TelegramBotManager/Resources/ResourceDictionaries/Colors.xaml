@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:TelegramBotManager.Resources.ResourceDictionaries">
+    <SolidColorBrush x:Key="firstColor" Color="#48466d" />
+    <SolidColorBrush x:Key="secondColor" Color="#3d84a8" />
+    <SolidColorBrush x:Key="thirdColor" Color="#46cdcf" />
+    <SolidColorBrush x:Key="fourColor" Color="#abedd8" />
+</ResourceDictionary>
