@@ -43,6 +43,7 @@ namespace TelegramBotManager.ViewModels
                 {
                     TelegramConnection telegramConnection = new TelegramConnection(AccessToken);
                     telegramConnection.PrintBotName();
+                    telegramConnection.StartReceivingMessages();
                 }));
             }
         }
