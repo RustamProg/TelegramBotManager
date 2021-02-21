@@ -1,17 +1,19 @@
-﻿using System;
+﻿using personal_game_library.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using TelegramBotManager.Models;
 
 namespace TelegramBotManager.ViewModels
 {
     class TelegramLogInViewModel: INotifyPropertyChanged
     {
         // Private fields
-
+        private string _accessToken;
 
 
         // Constructor
@@ -21,10 +23,29 @@ namespace TelegramBotManager.ViewModels
         }
 
         // Properties
-
+        public string AccessToken
+        {
+            get { return _accessToken; }
+            set
+            {
+                _accessToken = value;
+                OnPropertyChanged(nameof(AccessToken));
+            }
+        }
 
         // Commands
-
+        private RelayCommand connectToBot;
+        public RelayCommand ConnectToBot
+        {
+            get
+            {
+                return connectToBot ?? (connectToBot = new RelayCommand(obj =>
+                {
+                    TelegramConnection telegramConnection = new TelegramConnection(AccessToken);
+                    telegramConnection.PrintBotName();
+                }));
+            }
+        }
 
         // Property changed event handler
         public event PropertyChangedEventHandler PropertyChanged;

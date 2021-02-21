@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using TelegramBotManager.Views;
 
 namespace TelegramBotManager.ViewModels
 {
@@ -14,11 +15,10 @@ namespace TelegramBotManager.ViewModels
         // private fields
         private UserControl currentWindow;
 
-
         //Constructor
         public MainWindowViewModel()
         {
-            
+            currentWindow = new TelegramLogInView();
         }
 
         // Properties
