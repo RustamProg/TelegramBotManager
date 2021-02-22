@@ -5,34 +5,36 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
-using TelegramBotManager.Views;
 
 namespace TelegramBotManager.ViewModels
 {
-    class MainWindowViewModel : INotifyPropertyChanged
+    class BotManagementViewModel : INotifyPropertyChanged
     {
-        // private fields
-        private UserControl currentWindow;
-
-        //Constructor
-        public MainWindowViewModel()
-        {
-            currentWindow = new TelegramLogInView();
-        }
+        private string _botName;
+        private string _accessToken;
 
         // Properties
-        public UserControl CurrentWindow
+        public string AccessToken
         {
-            get { return currentWindow; }
+            get
+            {
+                return "Access token: " + _accessToken.Substring(0, 20) + "**********...";
+            }
             set
             {
-                OnPropertyChanged(nameof(CurrentWindow));
+                _accessToken = value;
+                OnPropertyChanged(nameof(AccessToken));
             }
         }
-
-
-        // Commands
+        public string BotName
+        {
+            get { return _botName; }
+            set
+            {
+                _botName = value;
+                OnPropertyChanged(nameof(BotName));
+            }
+        }
 
         // Property changed event handler
         public event PropertyChangedEventHandler PropertyChanged;

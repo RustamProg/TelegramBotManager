@@ -6,7 +6,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TelegramBotManager.Models;
+using TelegramBotManager.Views;
 
 namespace TelegramBotManager.ViewModels
 {
@@ -41,9 +43,8 @@ namespace TelegramBotManager.ViewModels
             {
                 return connectToBot ?? (connectToBot = new RelayCommand(obj =>
                 {
-                    TelegramConnection telegramConnection = new TelegramConnection(AccessToken);
-                    telegramConnection.PrintBotName();
-                    telegramConnection.StartReceivingMessages();
+                    /*TelegramConnection telegramConnection = new TelegramConnection(AccessToken);
+                    telegramConnection.StartReceivingMessages();*/
                 }));
             }
         }
