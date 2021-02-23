@@ -9,16 +9,40 @@ using Telegram.Bot.Args;
 
 namespace TelegramBotManager.Models
 {
-    class TelegramConnection
+    /// <summary>
+    /// Singleton class to managebot
+    /// </summary>
+    public sealed class TelegramConnection
     {
         private string _accessToken;
         private ITelegramBotClient _botClient;
+        private Dictionary<string, string> _botCommands = new Dictionary<string, string>() { { "/start", "Let's get started" } };
 
         /// <summary>
-        /// Creating an instance of connection to the bot
+        /// Realization of singleton class
         /// </summary>
-        /// <param name="accessToken">Access token of the bot (You can get in @BotFather)</param>
-        public TelegramConnection(string accessToken)
+        private static readonly Lazy<TelegramConnection> lazy =
+            new Lazy<TelegramConnection>(() => new TelegramConnection());
+        public static TelegramConnection Instance { get { return lazy.Value; } }
+
+        /// <summary>
+        /// You can set access token, but you can't get it back
+        /// </summary>
+        public string AccessToken
+        {
+            private get { return _accessToken; }
+            set
+            {
+                _accessToken = value;
+                SetConnection(_accessToken);
+            }
+        }
+
+        /// <summary>
+        /// Sets connection to the bot using Access Token
+        /// </summary>
+        /// <param name="accessToken">Access token of the bot. You can get it in @BotFather telegram</param>
+        private void SetConnection(string accessToken)
         {
             _accessToken = accessToken;
             _botClient = new TelegramBotClient(_accessToken);
@@ -54,11 +78,19 @@ namespace TelegramBotManager.Models
         {
             if (e.Message.Text != null)
             {
-                if (e.Message.Text == "/start")
+                try
+                {
+                    string messageToSend = _botCommands[e.Message.Text];
+                    await _botClient.SendTextMessageAsync(
+                            chatId: e.Message.Chat,
+                            text: messageToSend
+                        );
+                }
+                catch (Exception sendMsgException)
                 {
                     await _botClient.SendTextMessageAsync(
                             chatId: e.Message.Chat,
-                            text: "Let's begin to work!"
+                            text: $"[Send message Exception]: {sendMsgException.Message} - {DateTime.Now.ToString("D")} \n I don't know what to answer this command"
                         );
                 }
             }

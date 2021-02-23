@@ -43,8 +43,9 @@ namespace TelegramBotManager.ViewModels
             {
                 return connectToBot ?? (connectToBot = new RelayCommand(obj =>
                 {
-                    /*TelegramConnection telegramConnection = new TelegramConnection(AccessToken);
-                    telegramConnection.StartReceivingMessages();*/
+                    TelegramConnection.Instance.AccessToken = AccessToken;
+                    TelegramConnection.Instance.PrintBotName();
+                    TelegramConnection.Instance.StartReceivingMessages();
                 }));
             }
         }
