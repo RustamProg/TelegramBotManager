@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TelegramBotManager"
         xmlns:vm="clr-namespace:TelegramBotManager.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="1200" WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <vm:MainWindowViewModel />

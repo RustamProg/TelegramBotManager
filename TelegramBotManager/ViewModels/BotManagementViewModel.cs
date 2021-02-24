@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using TelegramBotManager.Views;
 
 namespace TelegramBotManager.ViewModels
 {
@@ -12,8 +15,28 @@ namespace TelegramBotManager.ViewModels
     {
         private string _botName;
         private string _accessToken;
+        private UserControl _selectedControl;
+        public ObservableCollection<UserControl> Controls { get; set; }
+
+        public BotManagementViewModel()
+        {
+            Controls = new ObservableCollection<UserControl>()
+            {
+                new SendMessageView(),
+            };
+            _selectedControl = Controls[0];
+        }
 
         // Properties
+        public UserControl SelectedControl
+        {
+            get { return _selectedControl; }
+            set
+            {
+                _selectedControl = value;
+                OnPropertyChanged(nameof(SelectedControl));
+            }
+        }
         public string AccessToken
         {
             get

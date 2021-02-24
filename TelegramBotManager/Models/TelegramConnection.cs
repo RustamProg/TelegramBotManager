@@ -74,6 +74,14 @@ namespace TelegramBotManager.Models
             _botClient.StopReceiving();
         }
 
+        public async void SendMessage(TelegramMessage telMessage)
+        {
+            await _botClient.SendTextMessageAsync(
+                            chatId: telMessage.ChatID,
+                            text: telMessage.Message
+                        );
+        }
+
         private async void OnGotMessage(object sender, MessageEventArgs e)
         {
             if (e.Message.Text != null)

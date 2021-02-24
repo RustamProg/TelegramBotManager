@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using TelegramBotManager.Models;
 using TelegramBotManager.Views;
 
 namespace TelegramBotManager.ViewModels
@@ -16,6 +17,7 @@ namespace TelegramBotManager.ViewModels
     class MainWindowViewModel : INotifyPropertyChanged
     {
         // private fields
+        private string _accessToken;
         private UserControl currentWindow;
         public ObservableCollection<UserControl> Windows { get; set; }
 
@@ -31,6 +33,15 @@ namespace TelegramBotManager.ViewModels
         }
 
         // Properties
+        public string AccessToken
+        {
+            get { return _accessToken; }
+            set
+            {
+                _accessToken = value;
+                OnPropertyChanged(nameof(AccessToken));
+            }
+        }
         public UserControl CurrentWindow
         {
             get { return currentWindow; }
@@ -43,14 +54,17 @@ namespace TelegramBotManager.ViewModels
 
 
         // Commands
-        private RelayCommand testCommand; // TEST COMMAND NEEDS TO BE DELETED
-        public RelayCommand TestCommand
+        private RelayCommand openManagerCommand; // TEST COMMAND NEEDS TO BE DELETED
+        public RelayCommand OpenManagerCommand
         {
             get
             {
-                return testCommand ?? (testCommand = new RelayCommand(obj => {
+                return openManagerCommand ?? (openManagerCommand = new RelayCommand(obj => {
                     CurrentWindow = obj as UserControl;
-            }));
+                    TelegramConnection.Instance.AccessToken = AccessToken;
+                    TelegramConnection.Instance.PrintBotName();
+                    TelegramConnection.Instance.StartReceivingMessages();
+                }));
             }
         }
 

@@ -18,11 +18,10 @@
             <StackPanel Margin="300 100 300 100">
                 <Ellipse Fill="Aquamarine" Width="100" Height="100" HorizontalAlignment="Center" />
                 <TextBlock Text="Access Token" Margin="0 10 0 0"/>
-                <TextBox Text="{Binding AccessToken}" />
-                <Button Content="Connect" Command="{Binding ConnectToBot}"/>
+                <TextBox Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.AccessToken}" />
 
                 <!-- Test opening new view -->
-                    <Button Content="Just tes" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.TestCommand}"
+                <Button Content="Just tes" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.OpenManagerCommand}"
                         CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.Windows[1]}"/>
             </StackPanel>           
         </Border>

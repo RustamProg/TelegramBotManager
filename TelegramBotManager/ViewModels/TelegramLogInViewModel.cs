@@ -15,7 +15,7 @@ namespace TelegramBotManager.ViewModels
     class TelegramLogInViewModel: INotifyPropertyChanged
     {
         // Private fields
-        private string _accessToken;
+        
 
 
         // Constructor
@@ -25,30 +25,10 @@ namespace TelegramBotManager.ViewModels
         }
 
         // Properties
-        public string AccessToken
-        {
-            get { return _accessToken; }
-            set
-            {
-                _accessToken = value;
-                OnPropertyChanged(nameof(AccessToken));
-            }
-        }
+        
 
         // Commands
-        private RelayCommand connectToBot;
-        public RelayCommand ConnectToBot
-        {
-            get
-            {
-                return connectToBot ?? (connectToBot = new RelayCommand(obj =>
-                {
-                    TelegramConnection.Instance.AccessToken = AccessToken;
-                    TelegramConnection.Instance.PrintBotName();
-                    TelegramConnection.Instance.StartReceivingMessages();
-                }));
-            }
-        }
+
 
         // Property changed event handler
         public event PropertyChangedEventHandler PropertyChanged;
