@@ -66,10 +66,14 @@
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="ViewModels\BotManagementViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ReplyMarkupViewModel.cs" />
     <Compile Include="ViewModels\SendMessageViewModel.cs" />
     <Compile Include="ViewModels\TelegramLogInViewModel.cs" />
     <Compile Include="Views\BotManagementView.xaml.cs">
       <DependentUpon>BotManagementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReplyMarkupView.xaml.cs">
+      <DependentUpon>ReplyMarkupView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SendMessageView.xaml.cs">
       <DependentUpon>SendMessageView.xaml</DependentUpon>
@@ -94,6 +98,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BotManagementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReplyMarkupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

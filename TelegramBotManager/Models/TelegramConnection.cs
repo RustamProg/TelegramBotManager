@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Telegram.Bot;
 using Telegram.Bot.Args;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace TelegramBotManager.Models
 {
@@ -17,6 +19,21 @@ namespace TelegramBotManager.Models
         private string _accessToken;
         private ITelegramBotClient _botClient;
         private Dictionary<string, string> _botCommands = new Dictionary<string, string>() { { "/start", "Let's get started" } };
+        private ReplyKeyboardMarkup _keyboard = new ReplyKeyboardMarkup(new[] 
+        {
+            new KeyboardButton("Hello"),
+            new KeyboardButton("Hi"),
+            /*new[]
+            {
+                new KeyboardButton("Hello"),
+                new KeyboardButton("Hi"),
+            },
+            new[]
+            {
+                new KeyboardButton("Goodbye"),
+                new KeyboardButton("Bye"),
+            }*/
+        });
 
         /// <summary>
         /// Realization of singleton class
@@ -24,6 +41,18 @@ namespace TelegramBotManager.Models
         private static readonly Lazy<TelegramConnection> lazy =
             new Lazy<TelegramConnection>(() => new TelegramConnection());
         public static TelegramConnection Instance { get { return lazy.Value; } }
+
+        public ITelegramBotClient BotClient
+        {
+            get
+            {
+                return _botClient;
+            }
+            private set
+            {
+                _botClient = value;
+            }
+        }
 
         /// <summary>
         /// You can set access token, but you can't get it back
@@ -45,7 +74,7 @@ namespace TelegramBotManager.Models
         private void SetConnection(string accessToken)
         {
             _accessToken = accessToken;
-            _botClient = new TelegramBotClient(_accessToken);
+            BotClient = new TelegramBotClient(_accessToken);
         }
 
         /// <summary>
@@ -53,7 +82,7 @@ namespace TelegramBotManager.Models
         /// </summary>
         public void PrintBotName()
         {           
-            var me = _botClient.GetMeAsync().Result;
+            var me = BotClient.GetMeAsync().Result;
             MessageBox.Show($"Hello, my name is {me.FirstName} and my id is {me.Id}");
         }
 
@@ -62,8 +91,8 @@ namespace TelegramBotManager.Models
         /// </summary>
         public void StartReceivingMessages()
         {
-            _botClient.OnMessage += OnGotMessage;
-            _botClient.StartReceiving();
+            BotClient.OnMessage += OnGotMessage;
+            BotClient.StartReceiving();
         }
 
         /// <summary>
@@ -71,12 +100,12 @@ namespace TelegramBotManager.Models
         /// </summary>
         public void StopReceivingMessages()
         {
-            _botClient.StopReceiving();
+            BotClient.StopReceiving();
         }
 
         public async void SendMessage(TelegramMessage telMessage)
         {
-            await _botClient.SendTextMessageAsync(
+            await BotClient.SendTextMessageAsync(
                             chatId: telMessage.ChatID,
                             text: telMessage.Message
                         );
@@ -89,14 +118,15 @@ namespace TelegramBotManager.Models
                 try
                 {
                     string messageToSend = _botCommands[e.Message.Text];
-                    await _botClient.SendTextMessageAsync(
+                    await BotClient.SendTextMessageAsync(
                             chatId: e.Message.Chat,
-                            text: messageToSend
+                            text: messageToSend,
+                            replyMarkup: _keyboard
                         );
                 }
                 catch (Exception sendMsgException)
                 {
-                    await _botClient.SendTextMessageAsync(
+                    await BotClient.SendTextMessageAsync(
                             chatId: e.Message.Chat,
                             text: $"[Send message Exception]: {sendMsgException.Message} - {DateTime.Now.ToString("D")} \n I don't know what to answer this command"
                         );

@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 using TelegramBotManager.Models;
 
@@ -16,20 +17,22 @@ namespace TelegramBotManager.ViewModels
     class SendMessageViewModel: INotifyPropertyChanged
     {
         // Fields
-        public ObservableCollection<TelegramMessage> Messages { get; set; }
+        
         private string _currentMessage;
         private string _chatID;
         private Dictionary<string, int> chatList;
+
         public SendMessageViewModel()
         {
             Messages = new ObservableCollection<TelegramMessage>();
             chatList = new Dictionary<string, int>()
             {
                 { "@darkwolfing", 980350542 },
-            };
+            };           
         }
 
         //Properties
+        public ObservableCollection<TelegramMessage> Messages { get; set; }
         public string ChatID
         {
             get { return _chatID; }
@@ -69,10 +72,6 @@ namespace TelegramBotManager.ViewModels
                         Messages.Add(messageToSend);
                         TelegramConnection.Instance.SendMessage(messageToSend);
                         CurrentMessage = "";
-                    }
-                    else
-                    {
-                        MessageBox.Show("Invalid input");
                     }
                 }));
             }
