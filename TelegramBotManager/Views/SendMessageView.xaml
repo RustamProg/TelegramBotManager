@@ -44,7 +44,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- ChatID input field -->
-            <TextBox Grid.Column="0" TextWrapping="Wrap" Text="{Binding ChatID, Mode=TwoWay}"/>
+            <ComboBox ItemsSource="{Binding ChatKeysList}" SelectedItem="{Binding ChatID, Mode=TwoWay}" />
 
             <!-- Message input field -->
             <TextBox Grid.Column="1" TextWrapping="Wrap" Text="{Binding CurrentMessage, Mode=TwoWay}" />

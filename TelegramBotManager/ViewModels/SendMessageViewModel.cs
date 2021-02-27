@@ -18,20 +18,18 @@ namespace TelegramBotManager.ViewModels
 {
     class SendMessageViewModel: INotifyPropertyChanged
     {
-        // Fields
-        
+        // Fields      
         private string _currentMessage;
         private string _chatID;
-        private Dictionary<string, int> chatList;
+        private Dictionary<string, int> _chatList;
         private bool _isReplyMarkupEnabled = false;
+        private List<string> _chatKeysList;
 
         public SendMessageViewModel()
         {
             Messages = new ObservableCollection<TelegramMessage>();
-            chatList = new Dictionary<string, int>()
-            {
-                { "@darkwolfing", 980350542 },
-            };           
+            _chatList = ChatsSavesManager.OpenChatsToJson();
+            _chatKeysList = _chatList.Keys.ToList<string>();
         }
 
         //Properties
@@ -63,6 +61,15 @@ namespace TelegramBotManager.ViewModels
                 OnPropertyChanged(nameof(IsReplyMarkupEnabled));
             }
         }
+        public List<string> ChatKeysList
+        {
+            get { return _chatKeysList; }
+            set
+            {
+                _chatKeysList = value;
+                OnPropertyChanged(nameof(ChatKeysList));
+            }
+        }
 
         // Commands
         private RelayCommand _sendMessage;
@@ -72,9 +79,9 @@ namespace TelegramBotManager.ViewModels
             {
                 return _sendMessage ?? (_sendMessage = new RelayCommand(obj =>
                 {
-                    if (CurrentMessage.Length > 0 && chatList.ContainsKey(ChatID))
+                    if (CurrentMessage.Length > 0 && _chatList.ContainsKey(ChatID))
                     {
-                        Chat chat = new Chat(){ Id = chatList[ChatID] };
+                        Chat chat = new Chat(){ Id = _chatList[ChatID] };
                         InlineKeyboardMarkup keyboardToSend = null;
 
                         // If needed to send with keyboard reply

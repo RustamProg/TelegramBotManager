@@ -30,6 +30,12 @@ namespace TelegramBotManager.ViewModels
                 new BotManagementView()
             };
             currentWindow = Windows[0];
+
+
+            /*
+             NEED TO BE DELETED!             
+             */
+            AccessToken = "1127413447:AAHEp5-INXI5YxO6Qx13NLu-aJAXaVyRW3U";
         }
 
         // Properties
@@ -54,7 +60,7 @@ namespace TelegramBotManager.ViewModels
 
 
         // Commands
-        private RelayCommand openManagerCommand; // TEST COMMAND NEEDS TO BE DELETED
+        private RelayCommand openManagerCommand; // TEST COMMAND NEEDS TO BE DELETED 
         public RelayCommand OpenManagerCommand
         {
             get
@@ -62,7 +68,6 @@ namespace TelegramBotManager.ViewModels
                 return openManagerCommand ?? (openManagerCommand = new RelayCommand(obj => {
                     CurrentWindow = obj as UserControl;
                     TelegramConnection.Instance.AccessToken = AccessToken;
-                    TelegramConnection.Instance.PrintBotName();
                     TelegramConnection.Instance.StartReceivingMessages();
                 }));
             }

@@ -42,7 +42,7 @@
             <StackPanel Orientation="Vertical" Background="{StaticResource thirdColor}" Grid.Column="0" Grid.Row="1">
                 <Button Content="Send message" Command="{Binding OpenView}" CommandParameter="{Binding Controls[0]}"/>
                 <Button Content="Reply markup manager" Command="{Binding OpenView}" CommandParameter="{Binding Controls[1]}"/>
-                <Button Content="Setting commands" />
+                <Button Content="Edit commands" Command="{Binding OpenView}" CommandParameter="{Binding Controls[2]}"/>
                 <Button Content="Stickers album" />
                 <Button Content="Images album" />
                 <Button Content="Videos album" />
