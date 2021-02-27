@@ -22,7 +22,7 @@ namespace TelegramBotManager.Models
         private ReplyKeyboardMarkup _keyboard = new ReplyKeyboardMarkup(new[] 
         {
             new KeyboardButton("Hello"),
-            new KeyboardButton("Hi"),
+            new KeyboardButton("Goodbye"),
             /*new[]
             {
                 new KeyboardButton("Hello"),
@@ -107,7 +107,8 @@ namespace TelegramBotManager.Models
         {
             await BotClient.SendTextMessageAsync(
                             chatId: telMessage.ChatID,
-                            text: telMessage.Message
+                            text: telMessage.Message,
+                            replyMarkup: telMessage.Keyboard
                         );
         }
 

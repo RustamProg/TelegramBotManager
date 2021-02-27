@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 using TelegramBotManager.Models;
+using TelegramBotManager.Services;
 
 namespace TelegramBotManager.ViewModels
 {
@@ -21,6 +23,7 @@ namespace TelegramBotManager.ViewModels
         private string _currentMessage;
         private string _chatID;
         private Dictionary<string, int> chatList;
+        private bool _isReplyMarkupEnabled = false;
 
         public SendMessageViewModel()
         {
@@ -51,6 +54,15 @@ namespace TelegramBotManager.ViewModels
                 OnPropertyChanged(nameof(CurrentMessage));
             }
         }
+        public bool IsReplyMarkupEnabled
+        {
+            get { return _isReplyMarkupEnabled; }
+            set
+            {
+                _isReplyMarkupEnabled = value;
+                OnPropertyChanged(nameof(IsReplyMarkupEnabled));
+            }
+        }
 
         // Commands
         private RelayCommand _sendMessage;
@@ -63,11 +75,41 @@ namespace TelegramBotManager.ViewModels
                     if (CurrentMessage.Length > 0 && chatList.ContainsKey(ChatID))
                     {
                         Chat chat = new Chat(){ Id = chatList[ChatID] };
+                        InlineKeyboardMarkup keyboardToSend = null;
+
+                        // If needed to send with keyboard reply
+                        if (IsReplyMarkupEnabled)
+                        {
+                            // Count number of enabled buttons
+                            int buttonsLength = 0;
+                            for (int i = 0; i < 9; i++)
+                            {
+                                if (ReplyMarkupViewModel.AllCheckedButtons[i])
+                                {
+                                    buttonsLength++;
+                                }
+                            }
+
+                            // Creating array of enabled button's texts
+                            string[] buttonItem = new string[buttonsLength];
+                            for (int button = 0; button < 9; button++)
+                            {
+                                if (ReplyMarkupViewModel.AllCheckedButtons[button])
+                                {
+                                    buttonItem[button] = ReplyMarkupViewModel.MarkupButtons[button];
+                                }
+                            }
+
+                            // Creating keyboard
+                            keyboardToSend = new InlineKeyboardMarkup(InlineKeyboardMarkupManager.GetInlineKeyboard(buttonItem));
+                        }
+                        
                         TelegramMessage messageToSend = new TelegramMessage()
                         {
                             Message = CurrentMessage,
                             ChatID = chat,
                             DateTime = DateTime.Now.ToString("dd.MM.yyyy"),
+                            Keyboard = keyboardToSend
                         };
                         Messages.Add(messageToSend);
                         TelegramConnection.Instance.SendMessage(messageToSend);

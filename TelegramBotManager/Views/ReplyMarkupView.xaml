@@ -13,7 +13,7 @@
     </UserControl.DataContext>
     
     <Grid Background="{StaticResource fourColor}">
-        <Grid Margin="100">
+        <Grid Margin="100 50 100 200">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -25,52 +25,56 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <ToggleButton Grid.Column="0" Grid.Row="0">
+            
+            <!-- Markup toggle buttons -->
+            <ToggleButton Grid.Column="0" Grid.Row="0" IsChecked="{Binding AllCheckedButtons[0]}">
                 <ToggleButton.Content>
-                    <TextBlock Text="hellohh" FontSize="18" TextWrapping="Wrap"/>
+                    <TextBox Text="{Binding MarkupButtons[0], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" TextWrapping="Wrap" MinWidth="200"/>
                 </ToggleButton.Content>
             </ToggleButton>
-            <ToggleButton Grid.Column="1" Grid.Row="0">
+            <ToggleButton Grid.Column="1" Grid.Row="0" IsChecked="{Binding AllCheckedButtons[1]}">
                 <ToggleButton.Content>
-                    <TextBlock Text="hellohh" FontSize="18" TextWrapping="Wrap"/>
+                    <TextBox Text="{Binding MarkupButtons[1], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" TextWrapping="Wrap" MinWidth="200"/>
                 </ToggleButton.Content>
             </ToggleButton>
-            <ToggleButton Grid.Column="2" Grid.Row="0">
+            <ToggleButton Grid.Column="2" Grid.Row="0" IsChecked="{Binding AllCheckedButtons[2]}">
                 <ToggleButton.Content>
-                    <TextBlock Text="hellohh" FontSize="18" TextWrapping="Wrap"/>
+                    <TextBox Text="{Binding MarkupButtons[2], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" TextWrapping="Wrap" MinWidth="200"/>
                 </ToggleButton.Content>
             </ToggleButton>
-            <ToggleButton Grid.Column="0" Grid.Row="1">
+            <ToggleButton Grid.Column="0" Grid.Row="1" IsChecked="{Binding AllCheckedButtons[3]}">
                 <ToggleButton.Content>
-                    <TextBlock Text="hellohh" FontSize="18" TextWrapping="Wrap"/>
+                    <TextBox Text="{Binding MarkupButtons[3], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" TextWrapping="Wrap" MinWidth="200"/>
                 </ToggleButton.Content>
             </ToggleButton>
-            <ToggleButton Grid.Column="1" Grid.Row="1">
+            <ToggleButton Grid.Column="1" Grid.Row="1" IsChecked="{Binding AllCheckedButtons[4]}">
                 <ToggleButton.Content>
-                    <TextBlock Text="hellohh" FontSize="18" TextWrapping="Wrap"/>
+                    <TextBox Text="{Binding MarkupButtons[4], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" TextWrapping="Wrap" MinWidth="200"/>
                 </ToggleButton.Content>
             </ToggleButton>
-            <ToggleButton Grid.Column="2" Grid.Row="1">
+            <ToggleButton Grid.Column="2" Grid.Row="1" IsChecked="{Binding AllCheckedButtons[5]}">
                 <ToggleButton.Content>
-                    <TextBlock Text="hellohh" FontSize="18" TextWrapping="Wrap"/>
+                    <TextBox Text="{Binding MarkupButtons[5], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" TextWrapping="Wrap" MinWidth="200"/>
                 </ToggleButton.Content>
             </ToggleButton>
-            <ToggleButton Grid.Column="0" Grid.Row="2">
+            <ToggleButton Grid.Column="0" Grid.Row="2" IsChecked="{Binding AllCheckedButtons[6]}">
                 <ToggleButton.Content>
-                    <TextBlock Text="hellohh" FontSize="18" TextWrapping="Wrap"/>
+                    <TextBox Text="{Binding MarkupButtons[6], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" TextWrapping="Wrap" MinWidth="200"/>
                 </ToggleButton.Content>
             </ToggleButton>
-            <ToggleButton Grid.Column="1" Grid.Row="2">
+            <ToggleButton Grid.Column="1" Grid.Row="2" IsChecked="{Binding AllCheckedButtons[7]}">
                 <ToggleButton.Content>
-                    <TextBlock Text="hellohh" FontSize="18" TextWrapping="Wrap"/>
+                    <TextBox Text="{Binding MarkupButtons[7], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" TextWrapping="Wrap" MinWidth="200"/>
                 </ToggleButton.Content>
             </ToggleButton>
-            <ToggleButton Grid.Column="2" Grid.Row="2">
+            <ToggleButton Grid.Column="2" Grid.Row="2" IsChecked="{Binding AllCheckedButtons[8]}">
                 <ToggleButton.Content>
-                    <TextBlock Text="hellohh" FontSize="18" TextWrapping="Wrap"/>
+                    <TextBox Text="{Binding MarkupButtons[8], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" TextWrapping="Wrap" MinWidth="200"/>
                 </ToggleButton.Content>
             </ToggleButton>
-
+         
+            
+            
         </Grid>
     </Grid>
 </UserControl>

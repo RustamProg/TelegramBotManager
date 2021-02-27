@@ -1,4 +1,5 @@
-﻿using System;
+﻿using personal_game_library.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -23,6 +24,7 @@ namespace TelegramBotManager.ViewModels
             Controls = new ObservableCollection<UserControl>()
             {
                 new SendMessageView(),
+                new ReplyMarkupView(),
             };
             _selectedControl = Controls[0];
         }
@@ -56,6 +58,19 @@ namespace TelegramBotManager.ViewModels
             {
                 _botName = value;
                 OnPropertyChanged(nameof(BotName));
+            }
+        }
+
+        // Commands
+        private RelayCommand _openView;
+        public RelayCommand OpenView
+        {
+            get
+            {
+                return _openView ?? (_openView = new RelayCommand(obj =>
+                {
+                    SelectedControl = obj as UserControl;
+                }));
             }
         }
 

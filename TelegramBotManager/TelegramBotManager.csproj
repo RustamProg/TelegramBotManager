@@ -63,6 +63,7 @@
     </ApplicationDefinition>
     <Compile Include="Models\TelegramConnection.cs" />
     <Compile Include="Models\TelegramMessage.cs" />
+    <Compile Include="Services\InlineKeyboardMarkupManager.cs" />
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="ViewModels\BotManagementViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

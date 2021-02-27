@@ -43,10 +43,18 @@
                 <ColumnDefinition Width="0.1*" />
             </Grid.ColumnDefinitions>
 
+            <!-- ChatID input field -->
             <TextBox Grid.Column="0" TextWrapping="Wrap" Text="{Binding ChatID, Mode=TwoWay}"/>
 
+            <!-- Message input field -->
             <TextBox Grid.Column="1" TextWrapping="Wrap" Text="{Binding CurrentMessage, Mode=TwoWay}" />
 
+            <!-- Enable/disable reply keyboard -->
+            <StackPanel Grid.Row="1" Grid.Column="2">
+                <ToggleButton Height="35" Width="50" Content="Reply keyboard" IsChecked="{Binding IsReplyMarkupEnabled}"/>
+            </StackPanel>
+
+            <!-- Send message button -->
             <Button Grid.Column="4" Content="Send" Command="{Binding SendMessage}" />
 
         </Grid>
