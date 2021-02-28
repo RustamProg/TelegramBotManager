@@ -26,6 +26,7 @@ namespace TelegramBotManager.ViewModels
                 new SendMessageView(),
                 new ReplyMarkupView(),
                 new CommandsManagerView(),
+                new StickersAlbumView(),
             };
             _selectedControl = Controls[0];
         }
