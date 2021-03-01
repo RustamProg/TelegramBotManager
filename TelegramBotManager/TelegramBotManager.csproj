@@ -74,6 +74,7 @@
     <Compile Include="ViewModels\ReplyMarkupViewModel.cs" />
     <Compile Include="ViewModels\SendMessageViewModel.cs" />
     <Compile Include="ViewModels\StickersAlbumViewModel.cs" />
+    <Compile Include="ViewModels\StickersPopupViewModel.cs" />
     <Compile Include="ViewModels\TelegramLogInViewModel.cs" />
     <Compile Include="Views\BotManagementView.xaml.cs">
       <DependentUpon>BotManagementView.xaml</DependentUpon>
@@ -89,6 +90,9 @@
     </Compile>
     <Compile Include="Views\StickersAlbumView.xaml.cs">
       <DependentUpon>StickersAlbumView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StickersPopupView.xaml.cs">
+      <DependentUpon>StickersPopupView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TelegramLogInView.xaml.cs">
       <DependentUpon>TelegramLogInView.xaml</DependentUpon>
@@ -126,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StickersAlbumView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StickersPopupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

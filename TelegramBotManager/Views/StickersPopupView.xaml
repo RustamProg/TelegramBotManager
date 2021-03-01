@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="TelegramBotManager.Views.StickersPopupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TelegramBotManager.Views"
+             xmlns:vm="clr-namespace:TelegramBotManager.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.DataContext>
+        <vm:StickersPopupViewModel />
+    </UserControl.DataContext>
+   
+    <Grid Background="{StaticResource thirdColor}">
+        <TextBlock Text="Hello from popup" />
+    </Grid>
+</UserControl>

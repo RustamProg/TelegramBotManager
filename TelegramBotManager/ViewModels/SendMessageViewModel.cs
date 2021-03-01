@@ -24,6 +24,7 @@ namespace TelegramBotManager.ViewModels
         private Dictionary<string, int> _chatList;
         private bool _isReplyMarkupEnabled = false;
         private List<string> _chatKeysList;
+        private bool _isStickersPopupOpen;
 
         public SendMessageViewModel()
         {
@@ -68,6 +69,15 @@ namespace TelegramBotManager.ViewModels
             {
                 _chatKeysList = value;
                 OnPropertyChanged(nameof(ChatKeysList));
+            }
+        }
+        public bool IsStickersPopupOpen
+        {
+            get { return _isStickersPopupOpen; }
+            set
+            {
+                _isStickersPopupOpen = value;
+                OnPropertyChanged(nameof(IsStickersPopupOpen));
             }
         }
 

@@ -14,7 +14,6 @@ namespace TelegramBotManager.ViewModels
     class StickersAlbumViewModel : INotifyPropertyChanged
     {
         // Fields and constructor
-        private ObservableCollection<string> _imageLinks;
         private string _linkText;
 
         public StickersAlbumViewModel()
@@ -28,7 +27,7 @@ namespace TelegramBotManager.ViewModels
         }
 
         // Properties
-        public ObservableCollection<string> ImageLinks { get; set; }
+        public static ObservableCollection<string> ImageLinks { get; set; }
         public string LinkText
         {
             get { return _linkText; }

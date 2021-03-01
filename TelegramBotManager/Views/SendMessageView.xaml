@@ -17,7 +17,7 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="0.20*" />
         </Grid.RowDefinitions>
-        
+
         <!-- ListBox to display last sended messages -->
         <ListView Background="{StaticResource fourColor}" Margin="30" VerticalContentAlignment="Bottom" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Messages}">
