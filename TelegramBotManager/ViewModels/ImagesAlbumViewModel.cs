@@ -11,23 +11,22 @@ using System.Windows;
 
 namespace TelegramBotManager.ViewModels
 {
-    class StickersAlbumViewModel : INotifyPropertyChanged
+    class ImagesAlbumViewModel
     {
         // Fields and constructor
         private string _linkText;
 
-        public StickersAlbumViewModel()
+        public ImagesAlbumViewModel()
         {
-            StickersLinks = new ObservableCollection<string>()
+            ImagesLinks = new ObservableCollection<string>()
             {
-                "https://github.com/TelegramBots/book/raw/master/src/docs/sticker-fred.webp",
-                "https://raw.githubusercontent.com/TelegramBots/book/master/src/docs/sticker-dali.webp",
-                "https://chpic.su/_data/stickers/k/knight_vk/knight_vk_001.webp",
+                "https://i.artfile.ru/4724x2953_1142326_[www.ArtFile.ru].jpg",
+                "https://i.artfile.ru/4724x2953_1142326_[www.ArtFile.ru].jpg",
             };
         }
 
         // Properties
-        public static ObservableCollection<string> StickersLinks { get; set; }
+        public static ObservableCollection<string> ImagesLinks { get; set; }
         public string LinkText
         {
             get { return _linkText; }
@@ -39,20 +38,20 @@ namespace TelegramBotManager.ViewModels
         }
 
         //Commands
-        private RelayCommand _saveSticker;
-        public RelayCommand SaveSticker
+        private RelayCommand _saveImage;
+        public RelayCommand SaveImage
         {
             get
             {
-                return _saveSticker ?? (_saveSticker = new RelayCommand(obj =>
+                return _saveImage ?? (_saveImage = new RelayCommand(obj =>
                 {
-                    if (LinkText.Length > 0 && !StickersLinks.Contains(LinkText))
+                    if (LinkText.Length > 0 && !ImagesLinks.Contains(LinkText))
                     {
-                        StickersLinks.Add(LinkText);
+                        ImagesLinks.Add(LinkText);
                     }
-                    else if (StickersLinks.Count >= 15)
+                    else if (ImagesLinks.Count >= 15)
                     {
-                        MessageBox.Show("Unfortunately, you can't add more than 15 stickers, due to problems with scrollviewer (it will be fixed very soon)");                       
+                        MessageBox.Show("Unfortunately, you can't add more than 15 images, due to problems with scrollviewer (it will be fixed very soon)");
                     }
                     LinkText = "";
                 }));

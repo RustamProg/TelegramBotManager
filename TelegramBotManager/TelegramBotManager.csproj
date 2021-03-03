@@ -70,17 +70,22 @@
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="ViewModels\BotManagementViewModel.cs" />
     <Compile Include="ViewModels\CommandManagerViewModel.cs" />
+    <Compile Include="ViewModels\ImagesAlbumViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ReplyMarkupViewModel.cs" />
     <Compile Include="ViewModels\SendMessageViewModel.cs" />
     <Compile Include="ViewModels\StickersAlbumViewModel.cs" />
     <Compile Include="ViewModels\StickersPopupViewModel.cs" />
     <Compile Include="ViewModels\TelegramLogInViewModel.cs" />
+    <Compile Include="ViewModels\VideosAlbumViewModel.cs" />
     <Compile Include="Views\BotManagementView.xaml.cs">
       <DependentUpon>BotManagementView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CommandsManagerView.xaml.cs">
       <DependentUpon>CommandsManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImagesAlbumView.xaml.cs">
+      <DependentUpon>ImagesAlbumView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReplyMarkupView.xaml.cs">
       <DependentUpon>ReplyMarkupView.xaml</DependentUpon>
@@ -96,6 +101,9 @@
     </Compile>
     <Compile Include="Views\TelegramLogInView.xaml.cs">
       <DependentUpon>TelegramLogInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VideosAlbumView.xaml.cs">
+      <DependentUpon>VideosAlbumView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -121,6 +129,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ImagesAlbumView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ReplyMarkupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -138,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TelegramLogInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VideosAlbumView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

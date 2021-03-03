@@ -44,8 +44,8 @@
                 <Button Content="Reply markup manager" Command="{Binding OpenView}" CommandParameter="{Binding Controls[1]}"/>
                 <Button Content="Edit commands" Command="{Binding OpenView}" CommandParameter="{Binding Controls[2]}"/>
                 <Button Content="Stickers album" Command="{Binding OpenView}" CommandParameter="{Binding Controls[3]}"/>
-                <Button Content="Images album" />
-                <Button Content="Videos album" />
+                <Button Content="Images album" Command="{Binding OpenView}" CommandParameter="{Binding Controls[4]}"/>
+                <Button Content="Videos album" Command="{Binding OpenView}" CommandParameter="{Binding Controls[5]}"/>
             </StackPanel>
 
             <!-- Content presenter -->
