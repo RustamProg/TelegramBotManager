@@ -52,7 +52,32 @@
             <!-- Enable/disable reply keyboard -->
             <StackPanel Grid.Row="1" Grid.Column="2">
                 <ToggleButton Height="35" Width="50" Content="Reply keyboard" IsChecked="{Binding IsReplyMarkupEnabled}"/>
+                <ToggleButton x:Name="stickersPopupButton" Height="35" Width="50" Content="Stickers" IsChecked="{Binding IsStickersPopupOpen}"/>
             </StackPanel>
+            
+            <!-- Stickers popup -->
+            <Popup PlacementTarget="{Binding ElementName=stickersPopupButton}" StaysOpen="True" PopupAnimation="Slide"
+                   Placement="Top"  IsOpen="{Binding IsStickersPopupOpen}">
+
+                <ItemsControl ItemsSource="{Binding StickersLinks}" Background="AntiqueWhite">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="6" Margin="20"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Image MaxHeight="50" MaxWidth="50" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="50" UriSource="{Binding}" />
+                                </Image.Source>
+                            </Image>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+            </Popup>
+
 
             <!-- Send message button -->
             <Button Grid.Column="4" Content="Send" Command="{Binding SendMessage}" />

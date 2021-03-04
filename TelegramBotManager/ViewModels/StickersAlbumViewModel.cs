@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using TelegramBotManager.Services;
 
 namespace TelegramBotManager.ViewModels
 {
@@ -18,12 +19,7 @@ namespace TelegramBotManager.ViewModels
 
         public StickersAlbumViewModel()
         {
-            StickersLinks = new ObservableCollection<string>()
-            {
-                "https://github.com/TelegramBots/book/raw/master/src/docs/sticker-fred.webp",
-                "https://raw.githubusercontent.com/TelegramBots/book/master/src/docs/sticker-dali.webp",
-                "https://chpic.su/_data/stickers/k/knight_vk/knight_vk_001.webp",
-            };
+            StickersLinks = ResourcesCollections.StickersLinks;
         }
 
         // Properties
@@ -46,9 +42,9 @@ namespace TelegramBotManager.ViewModels
             {
                 return _saveSticker ?? (_saveSticker = new RelayCommand(obj =>
                 {
-                    if (LinkText.Length > 0 && !StickersLinks.Contains(LinkText))
+                    if (LinkText.Length > 0 && !ResourcesCollections.StickersLinks.Contains(LinkText))
                     {
-                        StickersLinks.Add(LinkText);
+                        ResourcesCollections.StickersLinks.Add(LinkText);
                     }
                     else if (StickersLinks.Count >= 15)
                     {

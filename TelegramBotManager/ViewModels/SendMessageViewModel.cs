@@ -24,16 +24,18 @@ namespace TelegramBotManager.ViewModels
         private Dictionary<string, int> _chatList;
         private bool _isReplyMarkupEnabled = false;
         private List<string> _chatKeysList;
-        private bool _isStickersPopupOpen;
+        private bool _isStickersPopupOpen = false;
 
         public SendMessageViewModel()
         {
             Messages = new ObservableCollection<TelegramMessage>();
             _chatList = ChatsSavesManager.OpenChatsToJson();
             _chatKeysList = _chatList.Keys.ToList<string>();
+            StickersLinks = ResourcesCollections.StickersLinks;
         }
 
         //Properties
+        public ObservableCollection<string> StickersLinks { get; set; }
         public ObservableCollection<TelegramMessage> Messages { get; set; }
         public string ChatID
         {
@@ -132,6 +134,18 @@ namespace TelegramBotManager.ViewModels
                         TelegramConnection.Instance.SendMessage(messageToSend);
                         CurrentMessage = "";
                     }
+                }));
+            }
+        }
+
+        private RelayCommand _switchPopup;
+        public RelayCommand SwitchPopup
+        {
+            get
+            {
+                return _switchPopup ?? (_switchPopup = new RelayCommand(obj =>
+                {
+                    IsStickersPopupOpen = !IsStickersPopupOpen;
                 }));
             }
         }

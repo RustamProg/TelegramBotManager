@@ -68,6 +68,7 @@
     <Compile Include="Services\ChatsSavesManager.cs" />
     <Compile Include="Services\InlineKeyboardMarkupManager.cs" />
     <Compile Include="Services\RelayCommand.cs" />
+    <Compile Include="Services\ResourcesCollections.cs" />
     <Compile Include="ViewModels\BotManagementViewModel.cs" />
     <Compile Include="ViewModels\CommandManagerViewModel.cs" />
     <Compile Include="ViewModels\ImagesAlbumViewModel.cs" />

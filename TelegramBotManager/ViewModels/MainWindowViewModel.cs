@@ -35,7 +35,7 @@ namespace TelegramBotManager.ViewModels
             /*
              NEED TO BE DELETED!             
              */
-            AccessToken = "empty";
+            AccessToken = "1127413447:AAHkv1to7QHXmwIC26hqSe7lfsgYWTkgia0";
         }
 
         // Properties
