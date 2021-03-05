@@ -65,6 +65,9 @@
     <Compile Include="Models\TelegramCommand.cs" />
     <Compile Include="Models\TelegramConnection.cs" />
     <Compile Include="Models\TelegramMessage.cs" />
+    <Compile Include="Models\TelegramMessageImage.cs" />
+    <Compile Include="Models\TelegramMessageSticker.cs" />
+    <Compile Include="Models\TelegramMessageVideo.cs" />
     <Compile Include="Services\ChatsSavesManager.cs" />
     <Compile Include="Services\InlineKeyboardMarkupManager.cs" />
     <Compile Include="Services\RelayCommand.cs" />

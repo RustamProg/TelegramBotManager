@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using TelegramBotManager.Services;
 
 namespace TelegramBotManager.ViewModels
 {
@@ -18,11 +19,7 @@ namespace TelegramBotManager.ViewModels
 
         public ImagesAlbumViewModel()
         {
-            ImagesLinks = new ObservableCollection<string>()
-            {
-                "https://i.artfile.ru/4724x2953_1142326_[www.ArtFile.ru].jpg",
-                "https://i.artfile.ru/4724x2953_1142326_[www.ArtFile.ru].jpg",
-            };
+            ImagesLinks = ResourcesCollections.ImagesLinks;
         }
 
         // Properties
@@ -45,11 +42,11 @@ namespace TelegramBotManager.ViewModels
             {
                 return _saveImage ?? (_saveImage = new RelayCommand(obj =>
                 {
-                    if (LinkText.Length > 0 && !ImagesLinks.Contains(LinkText))
+                    if (LinkText.Length > 0 && !ResourcesCollections.ImagesLinks.Contains(LinkText))
                     {
-                        ImagesLinks.Add(LinkText);
+                        ResourcesCollections.ImagesLinks.Add(LinkText);
                     }
-                    else if (ImagesLinks.Count >= 15)
+                    else if (ResourcesCollections.ImagesLinks.Count >= 15)
                     {
                         MessageBox.Show("Unfortunately, you can't add more than 15 images, due to problems with scrollviewer (it will be fixed very soon)");
                     }

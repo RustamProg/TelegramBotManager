@@ -25,6 +25,7 @@ namespace TelegramBotManager.ViewModels
         private bool _isReplyMarkupEnabled = false;
         private List<string> _chatKeysList;
         private bool _isStickersPopupOpen = false;
+        private bool _isImagesPopupOpen = false;
 
         public SendMessageViewModel()
         {
@@ -32,10 +33,12 @@ namespace TelegramBotManager.ViewModels
             _chatList = ChatsSavesManager.OpenChatsToJson();
             _chatKeysList = _chatList.Keys.ToList<string>();
             StickersLinks = ResourcesCollections.StickersLinks;
+            ImagesLinks = ResourcesCollections.ImagesLinks;
         }
 
         //Properties
         public ObservableCollection<string> StickersLinks { get; set; }
+        public ObservableCollection<string> ImagesLinks { get; set; }
         public ObservableCollection<TelegramMessage> Messages { get; set; }
         public string ChatID
         {
@@ -80,6 +83,15 @@ namespace TelegramBotManager.ViewModels
             {
                 _isStickersPopupOpen = value;
                 OnPropertyChanged(nameof(IsStickersPopupOpen));
+            }
+        }
+        public bool IsImagesPopupOpen
+        {
+            get { return _isImagesPopupOpen; }
+            set
+            {
+                _isImagesPopupOpen = value;
+                OnPropertyChanged(nameof(IsImagesPopupOpen));
             }
         }
 
@@ -146,6 +158,49 @@ namespace TelegramBotManager.ViewModels
                 return _switchPopup ?? (_switchPopup = new RelayCommand(obj =>
                 {
                     IsStickersPopupOpen = !IsStickersPopupOpen;
+                }));
+            }
+        }
+
+        private RelayCommand _sendSticker;
+        public RelayCommand SendSticker
+        {
+            get
+            {
+                return _sendSticker ?? (_sendSticker = new RelayCommand(obj =>
+                {
+                    Chat chat = new Chat() { Id = _chatList[ChatID] };
+                    TelegramMessageSticker messageToSend = new TelegramMessageSticker()
+                    {
+                        ChatID = chat,
+                        StickerURI = obj.ToString(),
+                        Message = "[Sended sticker]"
+                    };
+                    Messages.Add(messageToSend);
+                    TelegramConnection.Instance.SendSticker(messageToSend);
+                    CurrentMessage = "";
+                }));
+            }
+        }
+
+        private RelayCommand _sendImage;
+        public RelayCommand SendImage
+        {
+            get
+            {
+                return _sendImage ?? (_sendImage = new RelayCommand(obj =>
+                {
+                    Chat chat = new Chat() { Id = _chatList[ChatID] };
+                    TelegramMessageImage messageToSend = new TelegramMessageImage()
+                    {
+                        ChatID = chat,
+                        ImageURI = obj.ToString(),
+                        Message = "[Sended Image]: " + CurrentMessage,
+                        Caption = CurrentMessage
+                    };
+                    Messages.Add(messageToSend);
+                    TelegramConnection.Instance.SendImage(messageToSend);
+                    CurrentMessage = "";
                 }));
             }
         }

@@ -112,6 +112,22 @@ namespace TelegramBotManager.Models
                             replyMarkup: telMessage.Keyboard
                         );
         }
+        public async void SendSticker(TelegramMessageSticker telMessage)
+        {
+            await BotClient.SendStickerAsync(
+                            chatId: telMessage.ChatID,
+                            sticker: telMessage.StickerURI
+                        );
+        }
+        public async void SendImage(TelegramMessageImage telMessage)
+        {
+            await BotClient.SendPhotoAsync(
+                            chatId: telMessage.ChatID,
+                            photo: telMessage.ImageURI,
+                            caption: telMessage.Caption,
+                            parseMode: Telegram.Bot.Types.Enums.ParseMode.Default
+                        );
+        }
 
         private async void OnGotMessage(object sender, MessageEventArgs e)
         {
@@ -138,25 +154,27 @@ namespace TelegramBotManager.Models
                             replyMarkup: _keyboard
                         );
                     }
-                    return;
                 }
-                try
+                else
                 {
-                    var foundCommands = BotCommands.Where(x => x.Command == e.Message.Text);
-                    string messageToSend = foundCommands.First().Response;
-                    await BotClient.SendTextMessageAsync(
-                            chatId: e.Message.Chat,
-                            text: messageToSend,
-                            replyMarkup: _keyboard
-                        );
-                }
-                catch (Exception sendMsgException)
-                {
-                    await BotClient.SendTextMessageAsync(
-                            chatId: e.Message.Chat,
-                            text: $"[Send message Exception]: {sendMsgException.Message} - {DateTime.Now.ToString("D")} \n I don't know what to answer this command \n Your username is {e.Message.Chat.Username}"
-                        );
-                }
+                    try
+                    {
+                        var foundCommands = BotCommands.Where(x => x.Command == e.Message.Text);
+                        string messageToSend = foundCommands.First().Response;
+                        await BotClient.SendTextMessageAsync(
+                                chatId: e.Message.Chat,
+                                text: messageToSend,
+                                replyMarkup: _keyboard
+                            );
+                    }
+                    catch (Exception sendMsgException)
+                    {
+                        await BotClient.SendTextMessageAsync(
+                                chatId: e.Message.Chat,
+                                text: $"[Send message Exception]: {sendMsgException.Message} - {DateTime.Now.ToString("D")} \n I don't know what to answer this command \n Your username is {e.Message.Chat.Username}"
+                            );
+                    }
+                }               
             }
         }
     }

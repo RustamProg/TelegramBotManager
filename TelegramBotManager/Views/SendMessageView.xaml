@@ -49,12 +49,18 @@
             <!-- Message input field -->
             <TextBox Grid.Column="1" TextWrapping="Wrap" Text="{Binding CurrentMessage, Mode=TwoWay}" />
 
-            <!-- Enable/disable reply keyboard -->
+            <!-- Enable/disable reply keyboard and stickers -->
             <StackPanel Grid.Row="1" Grid.Column="2">
                 <ToggleButton Height="35" Width="50" Content="Reply keyboard" IsChecked="{Binding IsReplyMarkupEnabled}"/>
                 <ToggleButton x:Name="stickersPopupButton" Height="35" Width="50" Content="Stickers" IsChecked="{Binding IsStickersPopupOpen}"/>
             </StackPanel>
-            
+
+            <!-- Images and videos -->
+            <StackPanel Grid.Row="1" Grid.Column="3">
+                <ToggleButton x:Name="imagesPopupButton" Height="35" Width="50" Content="Images" IsChecked="{Binding IsImagesPopupOpen}"/>
+                <ToggleButton x:Name="videosPopupButton" Height="35" Width="50" Content="Videos"/>
+            </StackPanel>
+
             <!-- Stickers popup -->
             <Popup PlacementTarget="{Binding ElementName=stickersPopupButton}" StaysOpen="True" PopupAnimation="Slide"
                    Placement="Top"  IsOpen="{Binding IsStickersPopupOpen}">
@@ -71,11 +77,62 @@
                                 <Image.Source>
                                     <BitmapImage DecodePixelWidth="50" UriSource="{Binding}" />
                                 </Image.Source>
+                                <Image.InputBindings>
+                                    <MouseBinding Command="{Binding DataContext.SendSticker, RelativeSource={RelativeSource AncestorType=ItemsControl}}" 
+                                                  MouseAction="LeftClick" CommandParameter="{Binding}"/>
+                                </Image.InputBindings>
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Opacity" Value="0.7" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
                             </Image>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
+            </Popup>
+
+            <!-- Images popup -->
+            <Popup PlacementTarget="{Binding ElementName=imagesPopupButton}" StaysOpen="True" PopupAnimation="Slide"
+                   Placement="Top"  IsOpen="{Binding IsImagesPopupOpen}">
+
+                <ItemsControl ItemsSource="{Binding ImagesLinks}" Background="AntiqueWhite">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="2" Margin="20"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Image MaxHeight="100" MaxWidth="100" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="100" UriSource="{Binding}" />
+                                </Image.Source>
+                                <Image.InputBindings>
+                                    <MouseBinding Command="{Binding DataContext.SendImage, RelativeSource={RelativeSource AncestorType=ItemsControl}}" 
+                                                  MouseAction="LeftClick" CommandParameter="{Binding}"/>
+                                </Image.InputBindings>
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Opacity" Value="0.7" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
             </Popup>
 
 
