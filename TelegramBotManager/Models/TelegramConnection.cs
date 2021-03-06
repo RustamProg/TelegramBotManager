@@ -104,6 +104,10 @@ namespace TelegramBotManager.Models
             BotClient.StopReceiving();
         }
 
+        /// <summary>
+        /// Send basic text message
+        /// </summary>
+        /// <param name="telMessage">Telegram message</param>
         public async void SendMessage(TelegramMessage telMessage)
         {
             await BotClient.SendTextMessageAsync(
@@ -112,6 +116,10 @@ namespace TelegramBotManager.Models
                             replyMarkup: telMessage.Keyboard
                         );
         }
+        /// <summary>
+        /// Send sticker message
+        /// </summary>
+        /// <param name="telMessage">Telegram message sticker</param>
         public async void SendSticker(TelegramMessageSticker telMessage)
         {
             await BotClient.SendStickerAsync(
@@ -119,6 +127,10 @@ namespace TelegramBotManager.Models
                             sticker: telMessage.StickerURI
                         );
         }
+        /// <summary>
+        /// Send image message
+        /// </summary>
+        /// <param name="telMessage"></param>
         public async void SendImage(TelegramMessageImage telMessage)
         {
             await BotClient.SendPhotoAsync(
@@ -129,6 +141,7 @@ namespace TelegramBotManager.Models
                         );
         }
 
+        // On got message handler
         private async void OnGotMessage(object sender, MessageEventArgs e)
         {
             if (e.Message.Text != null)
