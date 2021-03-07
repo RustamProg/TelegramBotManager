@@ -16,7 +16,11 @@
     <Grid>
         <Border Background="{StaticResource thirdColor}">
             <StackPanel Margin="300 100 300 100">
+                
+                <!-- Ellipse, maybe someties here will be users logo -->
                 <Ellipse Fill="Aquamarine" Width="100" Height="100" HorizontalAlignment="Center" />
+                
+                <!-- Access token field, it refers to MainWindowViewModel -->
                 <TextBlock Text="Access Token" Margin="0 10 0 0"/>
                 <TextBox Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.AccessToken}" />
 

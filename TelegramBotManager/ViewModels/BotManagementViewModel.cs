@@ -21,6 +21,7 @@ namespace TelegramBotManager.ViewModels
 
         public BotManagementViewModel()
         {
+            // All views
             Controls = new ObservableCollection<UserControl>()
             {
                 new SendMessageView(),
