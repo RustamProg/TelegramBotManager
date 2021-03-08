@@ -17,6 +17,11 @@ namespace JsonAPIParser
         public string StreamReadData { get; private set; } // Data from stream property (string)
         public string FullApiUrl { get; private set; } // Full API URL string property
 
+        public DataCollector(string apiUrl, Dictionary<string, string> parameters)
+        {
+            SetAPIAndRead(apiUrl, parameters);
+        }
+
         // This method sets full api url from api url with parameters and returns string data from stream 
         public string SetAPIAndRead(string apiUrl, Dictionary<string, string> parameters)
         {
@@ -30,7 +35,7 @@ namespace JsonAPIParser
 
             // Creating HTTP request with User-Agent
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(FullApiUrl);
-            request.UserAgent = ".NET Framework";
+            request.UserAgent = ".NET Framework"; // Without this It won't work, It is a User-Agent
 
             // Trying to get response by api
             try

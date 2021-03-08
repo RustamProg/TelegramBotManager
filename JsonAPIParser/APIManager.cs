@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace JsonAPIParser
 {
     // Main class to interact with different APIs
-    public class APIManager
+    internal class APIManager
     {
         private string _requestURL;
         private Dictionary<string, string> _apiParams;
@@ -21,7 +21,7 @@ namespace JsonAPIParser
         /// <param name="apiParams">Dictinary of parameters: <param name, value></param>
         public APIManager(string APIurl, Dictionary<string, string> apiParams)
         {
-            _dataCollector = new DataCollector();
+            _dataCollector = new DataCollector(APIurl, apiParams);
             _requestURL = APIurl;
             _apiParams = apiParams;
         }
@@ -38,8 +38,7 @@ namespace JsonAPIParser
 
         public JObject GetDeserializedJson()
         {
-            JObject jsonData = _dataCollector.GetJsonDeserializedData();
-            return jsonData;
+            return _dataCollector.GetJsonDeserializedData(); ;
         }
     }
 }

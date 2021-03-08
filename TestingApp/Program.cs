@@ -16,12 +16,8 @@ namespace TestingApp
             {
                 {"experience", "between1And3" },
             };
-            APIManager manager = new APIManager("https://api.hh.ru/vacancies/?", apiParams);
-            Console.WriteLine(manager.GetDataInStringFormat());
-            Console.WriteLine(manager.GetFullApiUrl());
-            JObject jd = manager.GetDeserializedJson();
-            Console.WriteLine(jd["items"][0]["name"].ToString());
-            Console.ReadKey();
+            DataPresenter dataPresenter = new DataPresenter("https://api.hh.ru/vacancies/?", apiParams);
+            Console.WriteLine(dataPresenter.AllJsonAttributes);
         }
     }
 }
