@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JsonAPIParser;
+using Newtonsoft.Json.Linq;
 
 namespace TestingApp
 {
@@ -18,6 +19,8 @@ namespace TestingApp
             APIManager manager = new APIManager("https://api.hh.ru/vacancies/?", apiParams);
             Console.WriteLine(manager.GetDataInStringFormat());
             Console.WriteLine(manager.GetFullApiUrl());
+            JObject jd = manager.GetDeserializedJson();
+            Console.WriteLine(jd["items"][0]["name"].ToString());
             Console.ReadKey();
         }
     }
