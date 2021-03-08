@@ -34,6 +34,7 @@ namespace TelegramBotManager.ViewModels
             _chatKeysList = _chatList.Keys.ToList<string>();
             StickersLinks = ResourcesCollections.StickersLinks;
             ImagesLinks = ResourcesCollections.ImagesLinks;
+            ChatID = _chatList.First().Key;
         }
 
         //Properties
@@ -103,7 +104,7 @@ namespace TelegramBotManager.ViewModels
             {
                 return _sendMessage ?? (_sendMessage = new RelayCommand(obj =>
                 {
-                    if (CurrentMessage.Length > 0 && _chatList.ContainsKey(ChatID))
+                    if (CurrentMessage.Length > 0 && ChatID != null && _chatList.ContainsKey(ChatID))
                     {
                         Chat chat = new Chat(){ Id = _chatList[ChatID] };
                         InlineKeyboardMarkup keyboardToSend = null;
