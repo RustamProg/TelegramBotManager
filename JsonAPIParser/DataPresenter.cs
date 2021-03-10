@@ -7,10 +7,16 @@ using System.Threading.Tasks;
 
 namespace JsonAPIParser
 {
+    /// <summary>
+    /// Data presenter class
+    /// </summary>
     public class DataPresenter
     {
         private APIManager _manager;
         private JObject _jsonData;
+        /// <summary>
+        /// All Json attributes got from API
+        /// </summary>
         public List<string> AllJsonAttributes { get; private set; }
         public DataPresenter(string APIurl, Dictionary<string, string> apiParams)
         {
@@ -21,7 +27,7 @@ namespace JsonAPIParser
             {
                 try
                 {
-                    AllJsonAttributes.Add(item); // ошибка тут
+                    AllJsonAttributes.Add("ihg"); // ошибка тут
                 }
                 catch (Exception){}               
             }
