@@ -5,12 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Json;
 using System.IO;
+using System.Configuration;
 
 namespace TelegramBotManager.Services
 {    
     public static class ChatsSavesManager
     {
-        private static string _defaultFilePath = "D:\\C#Utils\\TelegramChatIDList\\chatlist.json";
+        // private static string _defaultFilePath = "D:\\C#Utils\\TelegramChatIDList\\chatlist.json"; - перенесён в конфиги
+
+        /* Здесь старое  */
+
 
         /// <summary>
         /// Saves dictinaries with usernames and chatids to default file path
@@ -19,7 +23,7 @@ namespace TelegramBotManager.Services
         public static void SaveChatsToJson(Dictionary<string, int> chatsDict)
         {
             DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Dictionary<string, int>));
-            using (FileStream fs = new FileStream(_defaultFilePath, FileMode.Append))
+            using (FileStream fs = new FileStream(ConfigurationManager.AppSettings["ChatSaves"], FileMode.Append))
             {
                 jsonSerializer.WriteObject(fs, chatsDict);
             }
@@ -33,7 +37,35 @@ namespace TelegramBotManager.Services
         {            
             Dictionary<string, int> chatsList = new Dictionary<string, int>();
             DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Dictionary<string, int>));
-            using (FileStream fs = new FileStream(_defaultFilePath, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(ConfigurationManager.AppSettings["ChatSaves"], FileMode.OpenOrCreate))
+            {
+                chatsList = jsonSerializer.ReadObject(fs) as Dictionary<string, int>;
+            }
+
+            return chatsList;
+        }
+
+
+
+
+
+
+        /* Здесь новое, через extensions methods */
+
+        public static void SaveChatsDictionaryToJson(this Dictionary<string, int> chatsDict)
+        {
+            DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Dictionary<string, int>));
+            using (FileStream fs = new FileStream(ConfigurationManager.AppSettings["ChatSaves"], FileMode.Append))
+            {
+                jsonSerializer.WriteObject(fs, chatsDict);
+            }
+        }
+
+        public static Dictionary<string, int> LoadChatsFromJsonToDictionary(this Dictionary<string, int> chatsDict)
+        {
+            Dictionary<string, int> chatsList = new Dictionary<string, int>();
+            DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Dictionary<string, int>));
+            using (FileStream fs = new FileStream(ConfigurationManager.AppSettings["ChatSaves"], FileMode.OpenOrCreate))
             {
                 chatsList = jsonSerializer.ReadObject(fs) as Dictionary<string, int>;
             }

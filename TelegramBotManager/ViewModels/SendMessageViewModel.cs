@@ -21,7 +21,7 @@ namespace TelegramBotManager.ViewModels
         // Fields      
         private string _currentMessage;
         private string _chatID;
-        private Dictionary<string, int> _chatList;
+        private Dictionary<string, int> _chatList = new Dictionary<string, int>();
         private bool _isReplyMarkupEnabled = false;
         private List<string> _chatKeysList;
         private bool _isStickersPopupOpen = false;
@@ -30,7 +30,7 @@ namespace TelegramBotManager.ViewModels
         public SendMessageViewModel()
         {
             Messages = new ObservableCollection<TelegramMessage>();
-            _chatList = ChatsSavesManager.OpenChatsToJson();
+            _chatList = _chatList.LoadChatsFromJsonToDictionary();
             _chatKeysList = _chatList.Keys.ToList<string>();
             StickersLinks = ResourcesCollections.StickersLinks;
             ImagesLinks = ResourcesCollections.ImagesLinks;
